@@ -43,13 +43,13 @@ prob1_df =
 mean(pull(prob1_df, samp))
 ```
 
-    ## [1] 0.07038003
+    ## [1] 0.3989299
 
 ``` r
 mean(pull(prob1_df, samp_gt_0))
 ```
 
-    ## [1] 0.6
+    ## [1] 0.7
 
 ``` r
 mean(pull(prob1_df, char_vec))
@@ -80,14 +80,14 @@ character or factor vectors.
 as.numeric(pull(prob1_df, samp))
 ```
 
-    ##  [1] -0.85781416  0.34361716  0.20213293 -1.21425030  0.95073735 -0.41086717
-    ##  [7]  0.46302929  1.28543730  0.02115288 -0.07937501
+    ##  [1] -1.0911170  0.4172685 -2.1558404  2.2960431  0.4238959  1.3282800
+    ##  [7] -0.1368371  1.3367249  1.3591922  0.2116888
 
 ``` r
 as.numeric(pull(prob1_df, samp_gt_0))
 ```
 
-    ##  [1] 0 1 1 0 1 0 1 1 1 0
+    ##  [1] 0 1 0 1 1 1 0 1 1 1
 
 ``` r
 as.numeric(pull(prob1_df, char_vec))
@@ -117,8 +117,8 @@ started with 2, and not 1?
 as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 ```
 
-    ##  [1] 0.00000000 0.34361716 0.20213293 0.00000000 0.95073735 0.00000000
-    ##  [7] 0.46302929 1.28543730 0.02115288 0.00000000
+    ##  [1] 0.0000000 0.4172685 0.0000000 2.2960431 0.4238959 1.3282800 0.0000000
+    ##  [8] 1.3367249 1.3591922 0.2116888
 
 ``` r
 as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
@@ -140,8 +140,7 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
 
 # Problem 2
 
-Here is a quick snapshot of the penguins dataset featuring the first ten
-rows and columns.
+## Here is a quick snapshot of the penguins dataset featuring the first ten rows and columns.
 
 ``` r
 data("penguins", package = "palmerpenguins")
@@ -163,7 +162,7 @@ head(penguins, n=10)
     ## 10 Adelie  Torge…           42            20.2              190        4250
     ## # … with 2 more variables: sex <fct>, year <int>
 
-The penguins dataset has these variables:
+### The penguins dataset has these variables:
 
 ``` r
 names(penguins)
@@ -173,7 +172,7 @@ names(penguins)
     ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
     ## [7] "sex"               "year"
 
-The penguins dataset has this many rows and columns.
+### The penguins dataset has 344 rows and 8 columns.
 
 ``` r
 nrow(penguins)
@@ -186,3 +185,41 @@ ncol(penguins)
 ```
 
     ## [1] 8
+
+### The mean flipper length.
+
+Getting an error here because there are a few missing values in the data
+set.
+
+``` r
+mean(pull(penguins, flipper_length_mm))
+```
+
+    ## [1] NA
+
+Will try the na.omit function now.
+
+``` r
+na.omit(penguins)
+```
+
+    ## # A tibble: 333 x 8
+    ##    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+    ##    <fct>   <fct>           <dbl>         <dbl>            <int>       <int>
+    ##  1 Adelie  Torge…           39.1          18.7              181        3750
+    ##  2 Adelie  Torge…           39.5          17.4              186        3800
+    ##  3 Adelie  Torge…           40.3          18                195        3250
+    ##  4 Adelie  Torge…           36.7          19.3              193        3450
+    ##  5 Adelie  Torge…           39.3          20.6              190        3650
+    ##  6 Adelie  Torge…           38.9          17.8              181        3625
+    ##  7 Adelie  Torge…           39.2          19.6              195        4675
+    ##  8 Adelie  Torge…           41.1          17.6              182        3200
+    ##  9 Adelie  Torge…           38.6          21.2              191        3800
+    ## 10 Adelie  Torge…           34.6          21.1              198        4400
+    ## # … with 323 more rows, and 2 more variables: sex <fct>, year <int>
+
+``` r
+mean(pull(penguins, flipper_length_mm))
+```
+
+    ## [1] NA

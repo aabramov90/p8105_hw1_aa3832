@@ -62,21 +62,36 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
 
 # Problem 2
 
-Here is a quick snapshot of the penguins dataset featuring the first ten rows and columns.  
+## Here is a quick snapshot of the penguins dataset featuring the first ten rows and columns.  
 
 ```{r}
 data("penguins", package = "palmerpenguins")
 head(penguins, n=10)
 ```
 
-The penguins dataset has these variables:
+### The penguins dataset has these variables:
 ```{r}
 names(penguins)
 ```
 
-The penguins dataset has this many rows and columns.  
+### The penguins dataset has 344 rows and 8 columns.  
 ```{r}
 nrow(penguins)
 ncol(penguins)
+```
+
+### The mean flipper length.  
+
+Getting an error here because there are a few missing values in the data set.  
+
+```{r}
+mean(pull(penguins, flipper_length_mm))
+```
+
+Will try the na.omit function now.
+
+```{r}
+na.omit(penguins)
+mean(pull(penguins, flipper_length_mm))
 ```
 
