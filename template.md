@@ -2,7 +2,7 @@ Homework 1
 ================
 Alexey Abramov
 
-This is my solution to HW1
+This is my solution to HW1\!
 
 ``` r
 library(tidyverse)
@@ -21,7 +21,7 @@ library(tidyverse)
 
 # Problem 1
 
-Create a df with specified elements
+## Create a df with the specified elements:
 
 ``` r
 prob1_df = 
@@ -33,19 +33,19 @@ prob1_df =
   )
 ```
 
-Take the mean of each variable in my data frame
+## Take the mean of each variable in my data frame:
 
 ``` r
 mean(pull(prob1_df, samp))
 ```
 
-    ## [1] -0.6668902
+    ## [1] 0.04163491
 
 ``` r
 mean(pull(prob1_df, samp_gt_0))
 ```
 
-    ## [1] 0.1
+    ## [1] 0.3
 
 ``` r
 mean(pull(prob1_df, char_vec))
@@ -65,20 +65,25 @@ mean(pull(prob1_df, factor_vec))
 
     ## [1] NA
 
-I can take the mean of numbers and logical, but not character or factor.
+### Comments:
+
+I can take the mean of a numerical and logical vectors, but not the
+character or factor vectors.
+
+## Here we are introducing coercion by converting the vectors using the as.numeric command
 
 ``` r
 as.numeric(pull(prob1_df, samp))
 ```
 
-    ##  [1] -0.7598889 -0.1092824 -1.0066062 -0.1728365 -0.4508524 -1.4528594
-    ##  [7] -0.4824555  0.5058730 -0.5551340 -2.1848600
+    ##  [1] -0.49043167  0.43448447 -0.02654631 -0.17513087 -0.41133838  2.52394916
+    ##  [7] -0.20169637 -0.03261798 -1.48371480  0.27939178
 
 ``` r
 as.numeric(pull(prob1_df, samp_gt_0))
 ```
 
-    ##  [1] 0 0 0 0 0 0 0 1 0 0
+    ##  [1] 0 1 0 0 0 1 0 0 0 1
 
 ``` r
 as.numeric(pull(prob1_df, char_vec))
@@ -93,5 +98,40 @@ as.numeric(pull(prob1_df, factor_vec))
 ```
 
     ##  [1] 2 2 2 2 3 3 3 1 1 1
+
+### Comments
+
+Here we can see no change to the numeric vector and the logical vector
+reassigned 0s and 1s to define the true and false values. We were not
+able to reclassify the character vector to a numeric value. However, the
+factor vector was reassigned to 1, 2, and 3. Interesting that it started
+with 2, and not 1?
+
+## Here we performing mathematical operations on the vectors.
+
+``` r
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+```
+
+    ##  [1] 0.0000000 0.4344845 0.0000000 0.0000000 0.0000000 2.5239492 0.0000000
+    ##  [8] 0.0000000 0.0000000 0.2793918
+
+``` r
+as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+```
+
+    ## Warning in Ops.factor(as.factor(pull(prob1_df, samp_gt_0)), pull(prob1_df, : '*'
+    ## not meaningful for factors
+
+    ##  [1] NA NA NA NA NA NA NA NA NA NA
+
+``` r
+as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
+```
+
+    ## Warning in Ops.factor(as.factor(pull(prob1_df, samp_gt_0)), pull(prob1_df, : '*'
+    ## not meaningful for factors
+
+    ##  [1] NA NA NA NA NA NA NA NA NA NA
 
 # Problem 2
