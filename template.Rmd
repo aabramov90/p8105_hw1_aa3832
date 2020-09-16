@@ -52,9 +52,11 @@ as.numeric(pull(prob1_df, factor_vec))
 ### Comments
 Here we can see no change to the numeric vector, while the logical vector reassigned 0s and 1s to define the true and false values.  We were not able to reclassify the character vector to a numeric value.  However, the factor vector was reassigned to 1, 2, and 3.  Interesting that it started with 2, and not 1?  
 
-## Here we performing mathematical operations on the vectors.
+## Here we performing mathematical operations on the vectors. 
 
-```{r}
+This markdown with omitted  results.    
+
+```{r echo = T, results = "hide"}
 as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
@@ -82,16 +84,26 @@ ncol(penguins)
 
 ### The mean flipper length.  
 
-Getting an error here because there are a few missing values in the data set.  
+Got an an error here because there are a few missing values in the data set so I used the na.omit function.  
 
 ```{r}
-mean(pull(penguins, flipper_length_mm))
+mean(
+  na.omit(pull(penguins, flipper_length_mm)
+  ))
 ```
 
-Will try the na.omit function now.
+Creating a scatterplot of flipper length vs. bill length.
 
 ```{r}
-na.omit(penguins)
-mean(pull(penguins, flipper_length_mm))
+penguins_complete = na.omit(penguins)
+
+pull(penguins_complete, flipper_length_mm)
+pull(penguins_complete, bill_length_mm)
+
+ggplot(
+  penguins_complete, aes(flipper_length_mm, bill_length_mm)
+)
 ```
+
+
 
