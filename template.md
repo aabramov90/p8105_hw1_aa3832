@@ -19,6 +19,10 @@ library(tidyverse)
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
+``` r
+library(palmerpenguins)
+```
+
 # Problem 1
 
 ## Create a df with the specified elements:
@@ -39,13 +43,13 @@ prob1_df =
 mean(pull(prob1_df, samp))
 ```
 
-    ## [1] 0.04163491
+    ## [1] 0.07038003
 
 ``` r
 mean(pull(prob1_df, samp_gt_0))
 ```
 
-    ## [1] 0.3
+    ## [1] 0.6
 
 ``` r
 mean(pull(prob1_df, char_vec))
@@ -76,14 +80,14 @@ character or factor vectors.
 as.numeric(pull(prob1_df, samp))
 ```
 
-    ##  [1] -0.49043167  0.43448447 -0.02654631 -0.17513087 -0.41133838  2.52394916
-    ##  [7] -0.20169637 -0.03261798 -1.48371480  0.27939178
+    ##  [1] -0.85781416  0.34361716  0.20213293 -1.21425030  0.95073735 -0.41086717
+    ##  [7]  0.46302929  1.28543730  0.02115288 -0.07937501
 
 ``` r
 as.numeric(pull(prob1_df, samp_gt_0))
 ```
 
-    ##  [1] 0 1 0 0 0 1 0 0 0 1
+    ##  [1] 0 1 1 0 1 0 1 1 1 0
 
 ``` r
 as.numeric(pull(prob1_df, char_vec))
@@ -101,11 +105,11 @@ as.numeric(pull(prob1_df, factor_vec))
 
 ### Comments
 
-Here we can see no change to the numeric vector and the logical vector
-reassigned 0s and 1s to define the true and false values. We were not
-able to reclassify the character vector to a numeric value. However, the
-factor vector was reassigned to 1, 2, and 3. Interesting that it started
-with 2, and not 1?
+Here we can see no change to the numeric vector, while the logical
+vector reassigned 0s and 1s to define the true and false values. We were
+not able to reclassify the character vector to a numeric value. However,
+the factor vector was reassigned to 1, 2, and 3. Interesting that it
+started with 2, and not 1?
 
 ## Here we performing mathematical operations on the vectors.
 
@@ -113,8 +117,8 @@ with 2, and not 1?
 as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 ```
 
-    ##  [1] 0.0000000 0.4344845 0.0000000 0.0000000 0.0000000 2.5239492 0.0000000
-    ##  [8] 0.0000000 0.0000000 0.2793918
+    ##  [1] 0.00000000 0.34361716 0.20213293 0.00000000 0.95073735 0.00000000
+    ##  [7] 0.46302929 1.28543730 0.02115288 0.00000000
 
 ``` r
 as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
@@ -135,3 +139,50 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
     ##  [1] NA NA NA NA NA NA NA NA NA NA
 
 # Problem 2
+
+Here is a quick snapshot of the penguins dataset featuring the first ten
+rows and columns.
+
+``` r
+data("penguins", package = "palmerpenguins")
+head(penguins, n=10)
+```
+
+    ## # A tibble: 10 x 8
+    ##    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+    ##    <fct>   <fct>           <dbl>         <dbl>            <int>       <int>
+    ##  1 Adelie  Torge…           39.1          18.7              181        3750
+    ##  2 Adelie  Torge…           39.5          17.4              186        3800
+    ##  3 Adelie  Torge…           40.3          18                195        3250
+    ##  4 Adelie  Torge…           NA            NA                 NA          NA
+    ##  5 Adelie  Torge…           36.7          19.3              193        3450
+    ##  6 Adelie  Torge…           39.3          20.6              190        3650
+    ##  7 Adelie  Torge…           38.9          17.8              181        3625
+    ##  8 Adelie  Torge…           39.2          19.6              195        4675
+    ##  9 Adelie  Torge…           34.1          18.1              193        3475
+    ## 10 Adelie  Torge…           42            20.2              190        4250
+    ## # … with 2 more variables: sex <fct>, year <int>
+
+The penguins dataset has these variables:
+
+``` r
+names(penguins)
+```
+
+    ## [1] "species"           "island"            "bill_length_mm"   
+    ## [4] "bill_depth_mm"     "flipper_length_mm" "body_mass_g"      
+    ## [7] "sex"               "year"
+
+The penguins dataset has this many rows and columns.
+
+``` r
+nrow(penguins)
+```
+
+    ## [1] 344
+
+``` r
+ncol(penguins)
+```
+
+    ## [1] 8

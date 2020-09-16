@@ -8,6 +8,7 @@ This is my solution to HW1!
 
 ```{r}
 library(tidyverse)
+library(palmerpenguins)
 ```
 
 # Problem 1
@@ -49,7 +50,7 @@ as.numeric(pull(prob1_df, factor_vec))
 ```
 
 ### Comments
-Here we can see no change to the numeric vector and the logical vector reassigned 0s and 1s to define the true and false values.  We were not able to reclassify the character vector to a numeric value.  However, the factor vector was reassigned to 1, 2, and 3.  Interesting that it started with 2, and not 1?  
+Here we can see no change to the numeric vector, while the logical vector reassigned 0s and 1s to define the true and false values.  We were not able to reclassify the character vector to a numeric value.  However, the factor vector was reassigned to 1, 2, and 3.  Interesting that it started with 2, and not 1?  
 
 ## Here we performing mathematical operations on the vectors.
 
@@ -61,6 +62,21 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp))
 
 # Problem 2
 
-```{r}
+Here is a quick snapshot of the penguins dataset featuring the first ten rows and columns.  
 
+```{r}
+data("penguins", package = "palmerpenguins")
+head(penguins, n=10)
 ```
+
+The penguins dataset has these variables:
+```{r}
+names(penguins)
+```
+
+The penguins dataset has this many rows and columns.  
+```{r}
+nrow(penguins)
+ncol(penguins)
+```
+
