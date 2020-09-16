@@ -86,24 +86,24 @@ ncol(penguins)
 
 Got an an error here because there are a few missing values in the data set so I used the na.omit function.  
 
-```{r}
+```{r mean flipper length }
 mean(
   na.omit(pull(penguins, flipper_length_mm)
   ))
 ```
 
-Creating a scatterplot of flipper length vs. bill length.
+# Creating a scatterplot of flipper length vs. bill length.
 
-```{r}
-penguins_complete = na.omit(penguins)
-
-pull(penguins_complete, flipper_length_mm)
-pull(penguins_complete, bill_length_mm)
-
+```{r - scatterplot}
 ggplot(
-  penguins_complete, aes(flipper_length_mm, bill_length_mm)
-)
+  penguins, 
+  aes(x = flipper_length_mm, y = bill_length_mm, color = penguins$species)) + geom_point()
 ```
 
+### Save as a PDF
+
+```{r}
+ggsave("penguins.pdf")
+```
 
 
